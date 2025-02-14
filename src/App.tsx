@@ -394,7 +394,7 @@ function App() {
                           {prayer}
                         </span>
                       </div>
-                      <span style={{ color: 'green' }} className="font-bold text-2xl text-center font-arabic text-islamic-secondary">
+                      <span style={{ color: 'green' }} className="font-bold text-4xl text-center font-arabic text-islamic-secondary">
                         {getAdjustedTime(key, time)}
                       </span>
                       <div className="flex items-center justify-end space-x-2">

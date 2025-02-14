@@ -225,7 +225,7 @@ function App() {
   return (
     // Outer fixed-size container (1440px x 900px)
     <div
-      style={{ width: '1440px', height: '900px', margin: '0 auto', position: 'relative' }}
+      style={{ width: '1800px', height: '900px', margin: '0 auto', position: 'relative' }}
       className="bg-islamic-primary bg-pattern p-6 border-8 border-islamic-secondary"
       onMouseMove={() => {
         resetEditButtonTimer();

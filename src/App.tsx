@@ -3,6 +3,7 @@ import { Sun } from 'lucide-react';
 import prayerTimes from './prayerTimes';
 
 function App() {
+  // State definitions (times, offsets, edit mode, etc.)
   const [currentTime, setCurrentTime] = useState(new Date());
   const [timeOffsets, setTimeOffsets] = useState({
     fajr: 0,
@@ -22,12 +23,12 @@ function App() {
   const [timeToNextPrayer, setTimeToNextPrayer] = useState('');
   const [editMode, setEditMode] = useState(false);
 
-  // States to control the visibility of the control buttons
+  // States for auto-hiding control buttons
   const [showEditButton, setShowEditButton] = useState(true);
   const [showFullscreenButton, setShowFullscreenButton] = useState(true);
   const [isFullScreen, setIsFullScreen] = useState(false);
 
-  // Refs to hold timer IDs
+  // Refs to hold timeout IDs
   const editButtonTimerRef = useRef(null);
   const fullscreenButtonTimerRef = useRef(null);
 
@@ -65,7 +66,7 @@ function App() {
   function parseTimeWithOffset(timeString, offsetMinutes) {
     if (!timeString || timeString === 'Loading...') return null;
     const [hourStr, minuteStr] = timeString.split(':');
-    const dateStr = new Date().toISOString().split('T')[0];
+    const dateStr = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
     const dateObj = new Date(`${dateStr}T00:00:00`);
     dateObj.setHours(parseInt(hourStr, 10), parseInt(minuteStr, 10), 0, 0);
     dateObj.setMinutes(dateObj.getMinutes() + offsetMinutes);
@@ -161,7 +162,7 @@ function App() {
     }, 3000);
   };
 
-  // Initialize the timers on mount and clean up on unmount
+  // Initialize timers on mount and clean up on unmount
   useEffect(() => {
     resetEditButtonTimer();
     resetFullscreenButtonTimer();
@@ -222,15 +223,16 @@ function App() {
   })();
 
   return (
-    <div 
-      className="min-h-screen bg-islamic-primary bg-pattern p-6 border-8 border-islamic-secondary"
-      // Reset timers on any mouse movement over the page
+    // Outer fixed-size container (1440px x 900px)
+    <div
+      style={{ width: '1440px', height: '900px', margin: '0 auto', position: 'relative' }}
+      className="bg-islamic-primary bg-pattern p-6 border-8 border-islamic-secondary"
       onMouseMove={() => {
         resetEditButtonTimer();
         resetFullscreenButtonTimer();
       }}
     >
-      {/* Full Screen Toggle Button (positioned fixed at top-right) */}
+      {/* Full Screen Toggle Button */}
       {showFullscreenButton && (
         <button
           onClick={toggleFullScreen}
@@ -240,9 +242,10 @@ function App() {
         </button>
       )}
 
-      <div className="flex flex-wrap">
-        {/* Left Column */}
-        <div className="w-full lg:w-2/3 space-y-8">
+      {/* Main Content Container using fixed widths for left and right columns */}
+      <div style={{ display: 'flex', width: '100%', height: '100%' }}>
+        {/* Left Column (fixed 960px width) */}
+        <div style={{ width: '960px' }} className="space-y-8">
           {/* Header */}
           <div className="grid grid-cols-2 gap-8 mb-8">
             <div className="gradient-border bg-white rounded-3xl h-64 flex items-center justify-center">
@@ -286,9 +289,9 @@ function App() {
 
           {/* Main Content */}
           <div className="space-y-8">
-            {/* Top Row: Iftiyaar (left), Next Prayer (center), Sehri (right) */}
-            <div className="flex flex-wrap items-center justify-between gap-8">
-              {/* Left Circular Card - Iftiyaar (using Maghrib time) */}
+            {/* Top Row: Iftiyaar, Next Prayer, and Sehri */}
+            <div className="flex items-center justify-between gap-8">
+              {/* Iftiyaar (Maghrib time) */}
               <div className="circular-card transform hover:scale-105 transition-all duration-500">
                 <div className="circular-card-inner p-4">
                   <p style={{ marginBottom: '15px' }} className="text-3xl font-bold text-islamic-dark font-arabic">
@@ -300,8 +303,8 @@ function App() {
                 </div>
               </div>
 
-              {/* Next Prayer Card */}
-              <div className="flex-1 gradient-border">
+              {/* Next Prayer */}
+              <div className="gradient-border" style={{ flex: 1 }}>
                 <div className="glass-effect prayer-card-glow rounded-2xl p-8 bg-gradient-radial from-islamic-tertiary/40 to-transparent">
                   <h2 style={{ color: 'green' }} className="text-2xl font-bold text-center text-islamic-light font-arabic mb-6">
                     Next Prayer
@@ -324,7 +327,7 @@ function App() {
                 </div>
               </div>
 
-              {/* Right Circular Card - Sehri (using Fajr time) */}
+              {/* Sehri (Fajr time) */}
               <div className="circular-card transform hover:scale-105 transition-all duration-500">
                 <div className="circular-card-inner p-4">
                   <p style={{ marginBottom: '15px' }} className="text-3xl font-bold text-islamic-dark font-arabic">
@@ -338,7 +341,7 @@ function App() {
             </div>
 
             {/* Bottom Row: Hadith & Verse */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-2 gap-8">
               <div className="gradient-border">
                 <div className="glass-effect card-glow rounded-2xl p-8">
                   <h3 style={{ color: 'green' }} className="text-2xl font-bold text-islamic-light font-arabic mb-4 text-center">
@@ -369,11 +372,10 @@ function App() {
           </div>
         </div>
 
-        {/* Right Column: Prayer Timer and Sunrise Time */}
-        <div className="w-full lg:w-1/3 pl-0 lg:pl-8">
+        {/* Right Column (fixed 480px width) */}
+        <div style={{ width: '480px' }} className="pl-8">
           <div className="gradient-border">
             <div className="glass-effect card-glow rounded-2xl p-8 relative">
-              {/* Conditionally render the Edit Times button */}
               {showEditButton && (
                 <button
                   onClick={() => setEditMode(!editMode)}

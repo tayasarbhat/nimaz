@@ -298,15 +298,15 @@ function App() {
                }}>
             
             {/* Main Menu Button */}
-          <button
-            onClick={() => setShowThemeSelector(!showThemeSelector)}
+            <button
+              onClick={() => setShowThemeSelector(!showThemeSelector)}
               className="flex items-center gap-2 px-4 py-2 rounded-lg font-semibold shadow-lg transition-all mb-3 w-full"
-            style={{
-              background: currentTheme.colors.secondary,
-              color: currentTheme.colors.text
-            }}
-          >
-            <Palette className="w-5 h-5" />
+              style={{
+                background: currentTheme.colors.secondary,
+                color: currentTheme.colors.text
+              }}
+            >
+              <Palette className="w-5 h-5" />
               <span>Themes</span>
             </button>
 
@@ -334,426 +334,226 @@ function App() {
             >
               <Maximize className="w-5 h-5" />
               <span>{isFullScreen ? 'Exit Fullscreen' : 'Fullscreen'}</span>
-          </button>
+            </button>
 
             {/* Theme Selector Dropdown */}
             {showThemeSelector && (
               <div className="mt-4 grid grid-cols-2 gap-2 p-3 rounded-lg shadow-lg"
                    style={{ background: 'rgba(255, 255, 255, 0.9)' }}>
-            {themes.map((theme) => (
-              <button
-                key={theme.id}
-                onClick={() => {
-                  setCurrentTheme(theme);
-                  setShowThemeSelector(false);
-                }}
+                {themes.map((theme) => (
+                  <button
+                    key={theme.id}
+                    onClick={() => {
+                      setCurrentTheme(theme);
+                      setShowThemeSelector(false);
+                    }}
                     className="theme-button p-2 rounded-lg text-left transition-all"
-                style={{
-                  background: `linear-gradient(135deg, ${theme.colors.gradient1}, ${theme.colors.gradient2})`,
+                    style={{
+                      background: `linear-gradient(135deg, ${theme.colors.gradient1}, ${theme.colors.gradient2})`,
                       border: currentTheme.id === theme.id ? '2px solid' : '1px solid transparent',
-                  borderColor: currentTheme.id === theme.id ? theme.colors.secondary : 'transparent',
-                }}
-              >
-                <div className="text-xs font-bold text-white mb-1">{theme.name}</div>
-                <div className="text-xs font-arabic text-white opacity-90">{theme.nameArabic}</div>
-              </button>
-            ))}
-          </div>
+                      borderColor: currentTheme.id === theme.id ? theme.colors.secondary : 'transparent',
+                    }}
+                  >
+                    <div className="text-xs font-bold text-white mb-1">{theme.name}</div>
+                    <div className="text-xs font-arabic text-white opacity-90">{theme.nameArabic}</div>
+                  </button>
+                ))}
+              </div>
             )}
-        </div>
+          </div>
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
+      <div className="max-w-[95vw] 2xl:max-w-[90vw] mx-auto px-2 sm:px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-4 sm:gap-6">
           <div className="lg:col-span-6 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="glass-effect rounded-3xl p-6 shadow-xl transition-all hover:scale-105 relative overflow-hidden" style={cardStyle}>
-                {/* Modern background pattern */}
-                <div 
-                  className="absolute top-0 left-0 w-full h-full opacity-5"
-                  style={{ 
-                    background: `linear-gradient(45deg, ${currentTheme.colors.secondary} 0%, ${currentTheme.colors.accent} 100%)`
-                  }}
-                />
-                
-                {/* Decorative corner elements */}
-                <div 
-                  className="absolute top-4 left-4 w-3 h-3 rounded-full opacity-40"
-                  style={{ background: `${currentTheme.colors.accent}` }}
-                />
-                <div 
-                  className="absolute top-4 right-4 w-3 h-3 rounded-full opacity-40"
-                  style={{ background: `${currentTheme.colors.accent}` }}
-                />
-                <div 
-                  className="absolute bottom-4 left-4 w-3 h-3 rounded-full opacity-40"
-                  style={{ background: `${currentTheme.colors.accent}` }}
-                />
-                <div 
-                  className="absolute bottom-4 right-4 w-3 h-3 rounded-full opacity-40"
-                  style={{ background: `${currentTheme.colors.accent}` }}
-                />
-
-                <div className="relative z-10 text-center space-y-4">
-                  {/* Day of week with enhanced styling */}
-                  <div className="inline-block">
-                    <p className="text-xl md:text-2xl font-bold font-arabic" style={{ color: currentTheme.colors.accent }}>
-                      {currentTime.toLocaleDateString('en-US', { weekday: 'long' })}
-                    </p>
-                  </div>
-                  
-                  {/* Islamic date with prominent styling */}
-                  <div 
-                    className="inline-block px-4 py-2 rounded-xl shadow-md"
-                    style={{ background: `${currentTheme.colors.accent}20` }}
-                  >
-                    <p className="text-xl md:text-2xl font-bold font-arabic" style={{ color: currentTheme.colors.accent }}>
-                      {getIslamicDate()}
-                    </p>
-                  </div>
-                  
-                  {/* Gregorian date with subtle styling */}
-                  <div 
-                    className="inline-block px-2 py-1 rounded-lg shadow-sm"
-                    style={{ background: `${currentTheme.colors.secondary}10` }}
-                  >
-                    <p className="text-sm md:text-base font-semibold" style={{ color: '#000000' }}>
-                      {currentTime.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </p>
-                  </div>
+              <div className="glass-effect rounded-3xl p-4 sm:p-6 shadow-xl transition-all hover:scale-105" style={cardStyle}>
+                <div className="text-center space-y-2 sm:space-y-4">
+                  <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold font-arabic" style={{ color: currentTheme.colors.secondary }}>
+                    {currentTime.toLocaleDateString('en-US', { weekday: 'long' })}
+                  </p>
+                  <p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold font-arabic" style={{ color: currentTheme.colors.secondary }}>
+                    {getIslamicDate()}
+                  </p>
+                  <p className="text-sm sm:text-base lg:text-lg xl:text-xl" style={{ color: '#000000' }}>
+                    {currentTime.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </p>
                 </div>
               </div>
 
-              <div className="glass-effect rounded-3xl p-6 shadow-xl transition-all hover:scale-105 relative overflow-hidden" style={cardStyle}>
-                {/* Modern background gradient */}
-                <div 
-                  className="absolute inset-0 opacity-10"
-                  style={{ 
-                    background: `linear-gradient(135deg, ${currentTheme.colors.secondary} 0%, ${currentTheme.colors.accent} 100%)`
-                  }}
-                />
-                
-                {/* Floating dots pattern */}
-                <div 
-                  className="absolute top-4 right-4 w-16 h-16 opacity-20"
-                  style={{ 
-                    background: `radial-gradient(circle, ${currentTheme.colors.accent} 2px, transparent 2px)`,
-                    backgroundSize: '12px 12px'
-                  }}
-                />
-                
-                <div className="relative z-10 flex items-center justify-center">
-                  <div className="text-center">
-                    {/* Main time display */}
-                    <div className="flex items-baseline justify-center gap-3 mb-2">
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-6xl md:text-8xl font-bold font-arabic tracking-tight" style={{ color: currentTheme.colors.secondary }}>
-                  {currentTime.toLocaleTimeString('en-US', {
-                    hour: 'numeric',
-                            minute: '2-digit',
-                            hour12: true,
-                          }).replace(/\s?(AM|PM)$/i, '')}
-                        </span>
-                        <span className="text-4xl md:text-5xl font-bold" style={{ color: currentTheme.colors.accent }}>
-                          :
-                        </span>
-                        <span
-                          key={secondsKey}
-                          className={`text-6xl md:text-8xl font-bold font-arabic tracking-tight ${themeAnimations[currentTheme.id] || 'animate-pulse'}`}
-                          style={{ color: currentTheme.colors.accent }}
-                        >
-                          {currentTime.getSeconds().toString().padStart(2, '0')}
-                        </span>
-                      </div>
-                    </div>
-                    
-                    {/* AM/PM indicator - moved to bottom right corner */}
-                    <div 
-                      className="absolute -bottom-3 right-3"
+              <div className="glass-effect rounded-3xl p-4 sm:p-6 shadow-xl flex items-center justify-center transition-all hover:scale-105" style={cardStyle}>
+                <div className="flex items-baseline gap-2 md:gap-3">
+                  <p className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold font-arabic" style={{ color: currentTheme.colors.secondary }}>
+                    {currentTime.toLocaleTimeString('en-US', {
+                      hour: 'numeric',
+                      minute: '2-digit',
+                      hour12: true,
+                    }).replace(/\s?(AM|PM)$/i, '')}
+                  </p>
+                  <div className="flex flex-col items-start gap-1">
+                    <span
+                      key={secondsKey}
+                      className={`text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold font-arabic ${themeAnimations[currentTheme.id] || 'animate-pulse'}`}
+                      style={{ color: currentTheme.colors.accent }}
                     >
-                      <span className="text-sm md:text-base font-bold font-arabic" style={{ color: currentTheme.colors.secondary }}>
-                        {currentTime.toLocaleTimeString('en-US', {
-                          hour12: true,
-                        }).match(/\s?(AM|PM)$/i)?.[0].trim()}
-                      </span>
-                    </div>
+                      {currentTime.getSeconds().toString().padStart(2, '0')}
+                    </span>
+                    <span className="text-sm md:text-lg font-bold" style={{ color: currentTheme.colors.secondary }}>
+                      {currentTime.toLocaleTimeString('en-US', {
+                        hour12: true,
+                      }).match(/\s?(AM|PM)$/i)?.[0].trim()}
+                    </span>
                   </div>
                 </div>
-                
-                {/* Modern corner accents */}
-                <div 
-                  className="absolute top-3 left-3 w-2 h-2 rounded-full opacity-60"
-                  style={{ background: `${currentTheme.colors.accent}` }}
-                />
-                <div 
-                  className="absolute top-3 right-3 w-2 h-2 rounded-full opacity-60"
-                  style={{ background: `${currentTheme.colors.accent}` }}
-                />
-                <div 
-                  className="absolute bottom-3 left-3 w-2 h-2 rounded-full opacity-60"
-                  style={{ background: `${currentTheme.colors.accent}` }}
-                />
               </div>
             </div>
 
-            <div className="flex items-center justify-center gap-6">
-              <div className="glass-effect rounded-full w-32 h-32 md:w-40 md:h-40 shadow-lg transition-all hover:scale-105 group flex flex-col items-center justify-center" style={cardStyle}>
-                <div className="mx-auto mb-3">
-                  <Sun className="w-5 h-5 md:w-6 md:h-6 animate-pulse-slow" style={{ color: currentTheme.colors.accent }} />
+            <div className="flex items-center justify-center gap-4 sm:gap-6">
+              <div className="glass-effect rounded-full w-28 h-28 sm:w-32 sm:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48 shadow-lg transition-all hover:scale-105 group flex flex-col items-center justify-center" style={cardStyle}>
+                <div className="mx-auto mb-2 sm:mb-3">
+                  <Sun className="w-5 h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 animate-pulse-slow" style={{ color: currentTheme.colors.accent }} />
                 </div>
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-1 mb-1">
-                    <h3 className="text-sm md:text-base font-bold" style={{ color: currentTheme.colors.secondary }}>
+                    <h3 className="text-xs sm:text-sm lg:text-base xl:text-lg font-bold" style={{ color: currentTheme.colors.secondary }}>
                       Sunrise
                     </h3>
-                    <span className="text-sm md:text-base font-arabic" style={{ color: '#000000' }}>
+                    <span className="text-xs sm:text-sm lg:text-base xl:text-lg font-arabic" style={{ color: '#000000' }}>
                       طلوع
                     </span>
                   </div>
-                  <p className="text-lg md:text-xl font-black font-arabic" style={{ color: currentTheme.colors.accent }}>
+                  <p className="text-base sm:text-lg lg:text-xl xl:text-2xl font-black font-arabic" style={{ color: currentTheme.colors.accent }}>
                     {getAdjustedTime('sunrise', sunriseTime)}
                   </p>
                 </div>
               </div>
 
-              <div className="glass-effect rounded-3xl p-6 md:p-8 shadow-xl transition-all flex-1 max-w-md relative overflow-hidden flex flex-col justify-center" style={cardStyle}>
-                {/* Decorative background pattern */}
-                <div 
-                  className="absolute top-0 right-0 w-32 h-32 opacity-10"
-                  style={{ 
-                    background: `radial-gradient(circle, ${currentTheme.colors.accent} 2px, transparent 2px)`,
-                    backgroundSize: '20px 20px',
-                    transform: 'rotate(15deg)'
-                  }}
-                />
-                
-                {/* Gradient overlay */}
-                <div 
-                  className="absolute inset-0 opacity-5"
-                  style={{ 
-                    background: `linear-gradient(135deg, ${currentTheme.colors.secondary} 0%, ${currentTheme.colors.accent} 100%)`
-                  }}
-                />
-
-                <div className="relative z-10">
-                  {/* Header with icon - compact */}
-                  <div className="flex items-center justify-center gap-2 mb-4">
-                    <div 
-                      className="w-8 h-8 rounded-full flex items-center justify-center shadow-lg"
-                      style={{ background: `${currentTheme.colors.secondary}20` }}
-                    >
-                      <Sun className="w-4 h-4" style={{ color: currentTheme.colors.secondary }} />
-                    </div>
-                    <h2 className="text-lg md:text-xl font-bold text-center font-arabic" style={{ color: currentTheme.colors.secondary }}>
-                Next Prayer - الصلاة القادمة
-              </h2>
+              <div className="glass-effect rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xl transition-all flex-1 max-w-md xl:max-w-2xl" style={cardStyle}>
+                <h2 className="text-base sm:text-xl lg:text-2xl xl:text-3xl font-bold text-center font-arabic mb-3 sm:mb-5 whitespace-nowrap" style={{ color: currentTheme.colors.secondary }}>
+                  Next Prayer - الصلاة القادمة
+                </h2>
+                <div className="flex flex-col items-center justify-center gap-4">
+                  <div className="flex items-center gap-4">
+                    <p className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-black" style={{ color: '#000000' }}>
+                      {nextPrayer || '...'}
+                    </p>
+                    <p className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black font-arabic" style={{ color: currentTheme.colors.secondary }}>
+                      {urduNextPrayerName || '...'}
+                    </p>
                   </div>
-
-                  {/* Prayer name section - compact */}
-                  <div className="text-center mb-4">
-                    <div className="flex items-center justify-center gap-3">
-                      <div 
-                        className="px-3 py-1 rounded-full shadow-md"
-                        style={{ background: `${currentTheme.colors.secondary}20` }}
-                      >
-                        <p className="text-xl md:text-2xl font-black" style={{ color: currentTheme.colors.secondary }}>
-                    {nextPrayer || '...'}
-                  </p>
-                      </div>
-                      <div 
-                        className="px-3 py-1 rounded-full shadow-md"
-                        style={{ background: `${currentTheme.colors.secondary}20` }}
-                      >
-                        <p className="text-2xl md:text-3xl font-black font-arabic" style={{ color: currentTheme.colors.secondary }}>
-                    {urduNextPrayerName || '...'}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Time section with enhanced styling - compact */}
-                  <div className="text-center space-y-3">
-                    <div 
-                      className="inline-block px-4 py-2 rounded-xl shadow-lg"
-                      style={{ background: `${currentTheme.colors.accent}15` }}
-                    >
-                      <p className="text-3xl md:text-4xl font-black font-arabic" style={{ color: currentTheme.colors.accent }}>
-                        {getAdjustedTime(nextPrayer.toLowerCase() as keyof typeof timeOffsets, 
-                          nextPrayer === 'Fajr' ? fajrTime :
-                          nextPrayer === 'Dhuhr' ? DhuhrTime :
-                          nextPrayer === 'Asr' ? asrTime :
-                          nextPrayer === 'Maghrib' ? maghribTime :
-                          nextPrayer === 'Isha' ? ishaTime : '')}
-                      </p>
-                    </div>
-                    
-                    {/* Countdown timer with enhanced styling */}
-                    <div 
-                      className="inline-block px-3 py-1 rounded-lg"
-                      style={{ background: `${currentTheme.colors.secondary}20` }}
-                    >
-                      <p className="text-base md:text-lg font-black font-arabic animate-pulse-slow" style={{ color: currentTheme.colors.secondary }}>
-                        {timeToNextPrayer || 'Loading...'}
-                      </p>
-                    </div>
+                  <div className="text-center">
+                    <p className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-black font-arabic mb-2" style={{ color: currentTheme.colors.accent }}>
+                      {getAdjustedTime(nextPrayer.toLowerCase() as keyof typeof timeOffsets, 
+                        nextPrayer === 'Fajr' ? fajrTime :
+                        nextPrayer === 'Dhuhr' ? DhuhrTime :
+                        nextPrayer === 'Asr' ? asrTime :
+                        nextPrayer === 'Maghrib' ? maghribTime :
+                        nextPrayer === 'Isha' ? ishaTime : '')}
+                    </p>
+                    <p className="text-base sm:text-lg lg:text-xl xl:text-2xl font-black font-arabic animate-pulse-slow" style={{ color: currentTheme.colors.secondary }}>
+                      {timeToNextPrayer || 'Loading...'}
+                    </p>
                   </div>
                 </div>
-
-                {/* Decorative corner elements */}
-                <div 
-                  className="absolute top-2 left-2 w-3 h-3 rounded-full opacity-30"
-                  style={{ background: `${currentTheme.colors.accent}` }}
-                />
-                <div 
-                  className="absolute top-2 right-2 w-3 h-3 rounded-full opacity-30"
-                  style={{ background: `${currentTheme.colors.accent}` }}
-                />
-                <div 
-                  className="absolute bottom-2 left-2 w-3 h-3 rounded-full opacity-30"
-                  style={{ background: `${currentTheme.colors.accent}` }}
-                />
-                <div 
-                  className="absolute bottom-2 right-2 w-3 h-3 rounded-full opacity-30"
-                  style={{ background: `${currentTheme.colors.accent}` }}
-                />
               </div>
 
-              <div className="glass-effect rounded-full w-32 h-32 md:w-40 md:h-40 shadow-lg transition-all hover:scale-105 group flex flex-col items-center justify-center" style={cardStyle}>
-                <div className="mx-auto mb-3">
-                  <Moon className="w-5 h-5 md:w-6 md:h-6 animate-pulse-slow" style={{ color: currentTheme.colors.secondary }} />
+              <div className="glass-effect rounded-full w-28 h-28 sm:w-32 sm:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48 shadow-lg transition-all hover:scale-105 group flex flex-col items-center justify-center" style={cardStyle}>
+                <div className="mx-auto mb-2 sm:mb-3">
+                  <Moon className="w-5 h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 animate-pulse-slow" style={{ color: currentTheme.colors.secondary }} />
                 </div>
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-1">
-                    <h3 className="text-sm md:text-base font-bold" style={{ color: currentTheme.colors.secondary }}>
+                    <h3 className="text-xs sm:text-sm lg:text-base xl:text-lg font-bold" style={{ color: currentTheme.colors.secondary }}>
                       Sunset
                     </h3>
-                    <span className="text-sm md:text-base font-arabic" style={{ color: '#000000' }}>
+                    <span className="text-xs sm:text-sm lg:text-base xl:text-lg font-arabic" style={{ color: '#000000' }}>
                       غروب
                     </span>
                   </div>
-                  <p className="text-lg md:text-xl font-black font-arabic" style={{ color: currentTheme.colors.secondary }}>
+                  <p className="text-base sm:text-lg lg:text-xl xl:text-2xl font-black font-arabic" style={{ color: currentTheme.colors.secondary }}>
                     {getAdjustedTime('maghrib', maghribTime)}
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="glass-effect rounded-3xl p-6 shadow-xl transition-all hover:scale-105" style={cardStyle}>
-                <h3 className="text-xl md:text-2xl font-bold text-center font-arabic mb-4" style={{ color: currentTheme.colors.secondary }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+              <div className="glass-effect rounded-3xl p-4 sm:p-6 shadow-xl transition-all hover:scale-105" style={cardStyle}>
+                <h3 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-center font-arabic mb-3 sm:mb-4" style={{ color: currentTheme.colors.secondary }}>
                   Hadith of the Day
                 </h3>
-                <p className="text-lg md:text-xl font-arabic text-center mb-3" style={{ color: '#000000' }}>
+                <p className="text-base sm:text-lg lg:text-xl xl:text-2xl font-arabic text-center mb-2 sm:mb-3" style={{ color: '#000000' }}>
                   عن أبي هريرة رضي الله عنه
                 </p>
-                <p className="text-sm md:text-base text-center" style={{ color: '#000000' }}>
+                <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-center" style={{ color: '#000000' }}>
                   The best charity is that which is given when one is in need and struggling.
                 </p>
               </div>
-              <div className="glass-effect rounded-3xl p-6 shadow-xl transition-all hover:scale-105" style={cardStyle}>
-                <h3 className="text-xl md:text-2xl font-bold text-center font-arabic mb-4" style={{ color: currentTheme.colors.secondary }}>
+              <div className="glass-effect rounded-3xl p-4 sm:p-6 shadow-xl transition-all hover:scale-105" style={cardStyle}>
+                <h3 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-center font-arabic mb-3 sm:mb-4" style={{ color: currentTheme.colors.secondary }}>
                   Verse of the Day
                 </h3>
-                <p className="text-lg md:text-xl font-arabic text-center mb-3" style={{ color: currentTheme.colors.secondary }}>
+                <p className="text-base sm:text-lg lg:text-xl xl:text-2xl font-arabic text-center mb-2 sm:mb-3" style={{ color: currentTheme.colors.secondary }}>
                   وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ
                 </p>
-                <p className="text-sm md:text-base text-center" style={{ color: '#000000' }}>
+                <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-center" style={{ color: '#000000' }}>
                   And when My servants ask you concerning Me, indeed I am near. (2:186)
                 </p>
               </div>
             </div>
 
+           
+             
+           
           </div>
 
-          <div className="lg:col-span-4 space-y-6">
-            <div className="glass-effect rounded-3xl p-4 shadow-xl transition-all" style={cardStyle}>
-              <h2 className="text-2xl md:text-3xl text-center font-bold font-arabic mb-4" style={{ color: currentTheme.colors.secondary }}>
+          <div className="lg:col-span-4 space-y-4 sm:space-y-6">
+            <div className="dome-arch-container glass-effect rounded-3xl p-3 sm:p-4 lg:p-6 shadow-xl transition-all floral-pattern" style={{
+              ...cardStyle,
+              border: `4px solid ${currentTheme.colors.cardBorder}`,
+              boxShadow: `0 8px 32px rgba(0,0,0,0.1), inset 0 0 20px rgba(255,255,255,0.3)`,
+            }}>
+              <div className="dome-arch-border" style={{ color: currentTheme.colors.secondary }}></div>
+              <div className="decorative-corner decorative-corner-tl" style={{ color: currentTheme.colors.accent }}></div>
+              <div className="decorative-corner decorative-corner-tr" style={{ color: currentTheme.colors.accent }}></div>
+              <div className="decorative-corner decorative-corner-bl" style={{ color: currentTheme.colors.accent }}></div>
+              <div className="decorative-corner decorative-corner-br" style={{ color: currentTheme.colors.accent }}></div>
+
+              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-center font-bold font-arabic mb-3 sm:mb-4 relative z-10" style={{ color: currentTheme.colors.secondary }}>
                 Prayer Times - أوقات الصلاة
               </h2>
               <div className="flex flex-col items-center space-y-2 max-w-2xl mx-auto">
-                {prayerTimesDisplay.map(({ name, key, time, arabic, icon }, index) => (
+                {prayerTimesDisplay.map(({ name, key, time, arabic, icon }) => (
                   <div
                     key={name}
-                    className="glass-effect rounded-2xl px-4 py-3 shadow-lg transition-all hover:scale-105 w-full relative"
+                    className="glass-effect rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-lg transition-all hover:scale-105 w-full relative"
                     style={{
                       background: 'rgba(255, 255, 255, 0.5)',
                       border: `3px solid ${currentTheme.colors.cardBorder}`,
+                      borderLeft: `6px solid ${currentTheme.colors.accent}`,
                     }}
                   >
-                    {/* Arc-shaped corner brackets */}
-                    {/* Top-Left Corner */}
-                    <div 
-                      className="absolute top-1 left-1 w-6 h-6 opacity-50"
-                      style={{ 
-                        borderTop: `2px solid ${currentTheme.colors.secondary}`,
-                        borderLeft: `2px solid ${currentTheme.colors.secondary}`,
-                        borderTopLeftRadius: '8px',
-                        borderTopRightRadius: '0px',
-                        borderBottomLeftRadius: '0px',
-                        borderBottomRightRadius: '0px'
-                      }}
-                    />
-                    
-                    {/* Top-Right Corner */}
-                    <div 
-                      className="absolute top-1 right-1 w-6 h-6 opacity-50"
-                      style={{ 
-                        borderTop: `2px solid ${currentTheme.colors.secondary}`,
-                        borderRight: `2px solid ${currentTheme.colors.secondary}`,
-                        borderTopLeftRadius: '0px',
-                        borderTopRightRadius: '8px',
-                        borderBottomLeftRadius: '0px',
-                        borderBottomRightRadius: '0px'
-                      }}
-                    />
-                    
-                    {/* Bottom-Left Corner */}
-                    <div 
-                      className="absolute bottom-1 left-1 w-6 h-6 opacity-50"
-                      style={{ 
-                        borderBottom: `2px solid ${currentTheme.colors.secondary}`,
-                        borderLeft: `2px solid ${currentTheme.colors.secondary}`,
-                        borderTopLeftRadius: '0px',
-                        borderTopRightRadius: '0px',
-                        borderBottomLeftRadius: '8px',
-                        borderBottomRightRadius: '0px'
-                      }}
-                    />
-                    
-                    {/* Bottom-Right Corner */}
-                    <div 
-                      className="absolute bottom-1 right-1 w-6 h-6 opacity-50"
-                      style={{ 
-                        borderBottom: `2px solid ${currentTheme.colors.secondary}`,
-                        borderRight: `2px solid ${currentTheme.colors.secondary}`,
-                        borderTopLeftRadius: '0px',
-                        borderTopRightRadius: '0px',
-                        borderBottomLeftRadius: '0px',
-                        borderBottomRightRadius: '8px'
-                      }}
-                    />
-                    
-                    <div className="flex items-center justify-between w-full relative z-10">
-                      <div className="flex items-center gap-3 min-w-[140px]">
-                        <span style={{ color: currentTheme.colors.secondary }}>{icon}</span>
-                        <span className="font-bold text-xl" style={{ color: '#000000' }}>
+                    <div className="flex items-center justify-between w-full gap-2">
+                      <div className="flex items-center gap-2 sm:gap-3 min-w-[100px] sm:min-w-[140px]">
+                        <span className="text-base sm:text-lg lg:text-xl xl:text-2xl" style={{ color: currentTheme.colors.secondary }}>{icon}</span>
+                        <span className="font-bold text-sm sm:text-base lg:text-lg xl:text-xl" style={{ color: '#000000' }}>
                           {name}
                         </span>
                       </div>
-                      <span className="font-bold text-5xl md:text-6xl font-arabic text-center flex-1" style={{ color: currentTheme.colors.secondary }}>
+                      <span className="font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-arabic text-center flex-1" style={{ color: currentTheme.colors.secondary }}>
                         {getAdjustedTime(key, time)}
                       </span>
-                      <span className="text-2xl md:text-3xl font-arabic min-w-[100px] text-right" style={{ color: '#000000' }}>
+                      <span className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-arabic min-w-[70px] sm:min-w-[100px] text-right" style={{ color: '#000000' }}>
                         {arabic}
                       </span>
                     </div>
                     {editMode && (
-                      <div className="flex gap-2 mt-3 justify-center relative z-10">
+                      <div className="flex gap-2 mt-3 justify-center">
                         <button
                           onClick={() => handleOffsetChange(key, 1)}
                           className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-all"
@@ -773,111 +573,15 @@ function App() {
               </div>
             </div>
 
-            {/* Zawal and Midday Cards - Back in right column */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-                <div
-                className="glass-effect rounded-2xl px-4 py-3 shadow-lg transition-all hover:scale-105 w-full"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.5)',
-                  border: `3px solid ${currentTheme.colors.cardBorder}`,
-                  }}
-                >
-                  <div className="flex items-center justify-between w-full">
-                  <div className="flex items-center gap-1 min-w-[90px]">
-                    <Sun className="w-4 h-4 animate-pulse-slow" style={{ color: currentTheme.colors.accent }} />
-                    <span className="font-bold text-sm md:text-base" style={{ color: '#000000' }}>
-                      Zawal
-                      </span>
-                    </div>
-                  <span className="font-bold text-lg md:text-xl font-arabic text-center flex-1 px-1" style={{ color: currentTheme.colors.accent }}>
-                      {getAdjustedTime('sunrise', sunriseTime)}
-                    </span>
-                  <span className="text-sm md:text-base font-arabic min-w-[50px] text-right" style={{ color: '#000000' }}>
-                    زوال
-                  </span>
-                </div>
-              </div>
-
-              <div
-                className="glass-effect rounded-2xl px-4 py-3 shadow-lg transition-all hover:scale-105 w-full"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.5)',
-                  border: `3px solid ${currentTheme.colors.cardBorder}`,
-                }}
-              >
-                <div className="flex items-center justify-between w-full">
-                  <div className="flex items-center gap-1 min-w-[90px]">
-                    <Sun className="w-4 h-4 animate-pulse-slow" style={{ color: currentTheme.colors.secondary }} />
-                    <span className="font-bold text-sm md:text-base" style={{ color: '#000000' }}>
-                      Midday
-                    </span>
-                  </div>
-                  <span className="font-bold text-lg md:text-xl font-arabic text-center flex-1 px-1" style={{ color: currentTheme.colors.secondary }}>
-                    {getAdjustedTime('dhuhr', DhuhrTime)}
-                  </span>
-                  <span className="text-sm md:text-base font-arabic min-w-[50px] text-right" style={{ color: '#000000' }}>
-                    ظُهر
-                  </span>
-                </div>
-              </div>
-            </div>
-
           </div>
 
         </div>
 
-        <div className="mt-4 glass-effect rounded-2xl p-3 md:p-4 shadow-lg text-center transition-all" style={cardStyle}>
-          <h1 className="text-lg md:text-2xl font-bold font-arabic" style={{ color: currentTheme.colors.secondary }}>
+        <div className="mt-4 sm:mt-6 glass-effect rounded-3xl p-3 sm:p-4 lg:p-6 shadow-xl text-center transition-all" style={cardStyle}>
+          <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold font-arabic" style={{ color: currentTheme.colors.secondary }}>
             مسجد شریف توحید پورہ کلارووس کشمیر
           </h1>
-          
-        </div>
 
-        {/* Split Etiquette Cards */}
-        <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-3">
-          {/* Phone Off Card - Left */}
-          <div className="glass-effect rounded-xl p-2 md:p-3 shadow-md transition-all" style={cardStyle}>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-2 mb-1">
-                <div 
-                  className="w-6 h-6 rounded-full flex items-center justify-center shadow-sm"
-                  style={{ background: `${currentTheme.colors.secondary}20` }}
-                >
-                  <svg className="w-3 h-3" style={{ color: currentTheme.colors.secondary }} fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                  </svg>
-                </div>
-                <h3 className="text-sm md:text-base font-bold font-arabic" style={{ color: currentTheme.colors.secondary }}>
-                  Please Switch Off Your Phones
-                </h3>
-              </div>
-              <p className="text-xs md:text-sm font-arabic" style={{ color: '#000000' }}>
-                يرجى إيقاف تشغيل الهواتف
-              </p>
-            </div>
-          </div>
-
-          {/* Keep Quiet Card - Right */}
-          <div className="glass-effect rounded-xl p-2 md:p-3 shadow-md transition-all" style={cardStyle}>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-2 mb-1">
-                <div 
-                  className="w-6 h-6 rounded-full flex items-center justify-center shadow-sm"
-                  style={{ background: `${currentTheme.colors.accent}20` }}
-                >
-                  <svg className="w-3 h-3" style={{ color: currentTheme.colors.accent }} fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
-                  </svg>
-                </div>
-                <h3 className="text-sm md:text-base font-bold font-arabic" style={{ color: currentTheme.colors.secondary }}>
-                  Please Keep Quiet
-                </h3>
-              </div>
-              <p className="text-xs md:text-sm font-arabic" style={{ color: '#000000' }}>
-                يرجى الحفاظ على الهدوء
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
